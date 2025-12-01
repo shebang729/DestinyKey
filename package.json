@@ -12,7 +12,9 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.62.11",
     "@trpc/client": "^11.0.0-rc.553",
+    "@trpc/react-query": "^11.0.0-rc.553",
     "@trpc/server": "^11.0.0-rc.553",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
