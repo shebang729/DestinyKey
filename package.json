@@ -4,10 +4,8 @@
   "description": "命運之鑰 - 八星磁場數字能量分析平台",
   "type": "module",
   "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=8.0.0"
+    "node": ">=18.0.0"
   },
-  "packageManager": "pnpm@8.15.0",
   "scripts": {
     "dev": "concurrently \"vite\" \"tsx watch server/_core/index.ts\"",
     "build": "vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
