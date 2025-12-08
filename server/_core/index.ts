@@ -28,7 +28,8 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: '命運之鑰 API 運行中' });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📱 命運之鑰 API 已啟動`);
+  console.log(`🌐 CORS allowed origin: ${process.env.FRONTEND_URL || 'http://localhost:3000'}`);
 });

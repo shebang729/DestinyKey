@@ -16,8 +16,11 @@ COPY . .
 # 構建應用
 RUN npm run build
 
-# 暴露端口
-EXPOSE 3001
+# 設置環境變數
+ENV NODE_ENV=production
+
+# 暴露端口（Railway 會動態分配）
+EXPOSE ${PORT:-3001}
 
 # 啟動應用
 CMD ["node", "dist/index.js"]
