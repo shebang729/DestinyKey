@@ -19,8 +19,7 @@ RUN npm run build
 # 設置環境變數
 ENV NODE_ENV=production
 
-# 暴露端口（Railway 會動態分配）
-EXPOSE ${PORT:-3001}
+# Railway 會自動處理端口，不需要 EXPOSE
 
 # 啟動應用
 CMD ["node", "dist/index.js"]
