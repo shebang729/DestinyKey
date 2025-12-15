@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import { trpc } from "../lib/trpc";
 
 export default function HomePage() {
@@ -8,26 +8,34 @@ export default function HomePage() {
   const [birthDate, setBirthDate] = useState("");
   const [birthTime, setBirthTime] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
-  const freeAnalysisMutation = trpc.analysis.freeAnalysis.useMutation();
+  const detailedAnalysisMutation = trpc.analysis.detailedAnalysis.useMutation();
 
   const handleAnalyze = async () => {
-    if (!phoneNumber || phoneNumber.length < 8) {
+    if (!fullName || !birthDate || !birthTime || !phoneNumber) {
+      alert("請填寫所有必填欄位");
+      return;
+    }
+    
+    if (phoneNumber.length < 8) {
       alert("請輸入至少8位數字的電話號碼");
       return;
     }
 
     setIsAnalyzing(true);
     try {
-      const result = await freeAnalysisMutation.mutateAsync({ phoneNumber });
+      // 組合出生日期和時間
+      const birthDateTime = `${birthDate}T${birthTime}:00`;
       
-      // 儲存用戶資料和分析結果到 sessionStorage
-      const userData = { fullName, birthDate, birthTime, phoneNumber };
-      sessionStorage.setItem('userData', JSON.stringify(userData));
-      sessionStorage.setItem('analysisResult', JSON.stringify(result));
+      const result = await detailedAnalysisMutation.mutateAsync({
+        name: fullName,
+        birthDate: birthDateTime,
+        phoneNumber
+      });
       
-      setLocation("/result");
+      // 導航到結果頁面，並傳遞結果數據
+      navigate("/result", { state: { result } });
     } catch (error) {
       console.error("分析失敗:", error);
       alert("分析失敗，請稍後再試");

@@ -11,6 +11,15 @@ export interface MagneticField {
     relationship: number;
     health: number;
   };
+  luckyLevel: 'excellent' | 'good' | 'neutral' | 'challenging';
+  detailedAnalysis: {
+    overview: string;
+    career: string;
+    wealth: string;
+    relationship: string;
+    health: string;
+  };
+  suggestions: string[];
 }
 
 export interface NumberCombination {
