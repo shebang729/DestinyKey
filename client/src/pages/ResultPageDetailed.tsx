@@ -298,26 +298,46 @@ export default function ResultPageDetailed() {
 
         {/* 改善建議 CTA */}
         <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-lg p-8 text-center text-white mb-6">
-          <h2 className="text-3xl font-bold mb-4">🌟 想要獲得改善建議？</h2>
+          <h2 className="text-3xl font-bold mb-4">📞 尋找最合適您的電話號碼</h2>
           <p className="text-lg mb-6 opacity-90">
-            專業命理師將為您提供：
+            專業命理師將根據您的八字和磁場，為您尋找最佳的電話號碼組合
           </p>
-          <div className="grid md:grid-cols-2 gap-4 mb-6 text-left">
-            <div className="bg-white/10 rounded-lg p-4">
-              <h3 className="font-semibold mb-2">✨ 個人化改善方案</h3>
-              <p className="text-sm opacity-90">根據您的八字和磁場，提供針對性的開運建議</p>
-            </div>
-            <div className="bg-white/10 rounded-lg p-4">
-              <h3 className="font-semibold mb-2">🎯 幸運數字與顏色</h3>
-              <p className="text-sm opacity-90">專屬的幸運數字、顏色和方位指引</p>
-            </div>
-            <div className="bg-white/10 rounded-lg p-4">
-              <h3 className="font-semibold mb-2">💎 開運物品建議</h3>
-              <p className="text-sm opacity-90">適合您的開運飾品和擺設推薦</p>
-            </div>
-            <div className="bg-white/10 rounded-lg p-4">
-              <h3 className="font-semibold mb-2">📅 流年運勢分析</h3>
-              <p className="text-sm opacity-90">未來一年的運勢走向和重要時間點</p>
+          <div className="bg-white/10 rounded-lg p-6 mb-6 text-left">
+            <h3 className="text-xl font-bold mb-4">🎯 服務內容</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <span className="mr-3 text-2xl">✨</span>
+                <div>
+                  <h4 className="font-semibold mb-1">八字磁場分析</h4>
+                  <p className="text-sm opacity-90">深入分析您的八字命盤，找出最適合的數字組合</p>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-3 text-2xl">🔢</span>
+                <div>
+                  <h4 className="font-semibold mb-1">專屬號碼推薦</h4>
+                  <p className="text-sm opacity-90">提供 3-5 組最符合您命理的電話號碼選擇</p>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-3 text-2xl">💎</span>
+                <div>
+                  <h4 className="font-semibold mb-1">磁場能量解析</h4>
+                  <p className="text-sm opacity-90">詳細說明每組號碼的磁場能量和對您的影響</p>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-3 text-2xl">📋</span>
+                <div>
+                  <h4 className="font-semibold mb-1">申請指引</h4>
+                  <p className="text-sm opacity-90">提供電訊商申請流程和注意事項</p>
+                </div>
+              </li>
+            </ul>
+            <div className="mt-6 pt-6 border-t border-white/20">
+              <p className="text-sm opacity-75">
+                ⚠️ 注意：我們會為您尋找並推薦最合適的號碼，但需要您自行前往電訊商申請
+              </p>
             </div>
           </div>
           <a
@@ -328,8 +348,11 @@ export default function ResultPageDetailed() {
           >
             立即 DM Instagram @destinykey.hk
           </a>
-          <p className="mt-4 text-sm opacity-75">
-            HK$1,999 完整諮詢服務
+          <p className="mt-4 text-2xl font-bold">
+            HK$3,888
+          </p>
+          <p className="text-sm opacity-75">
+            專業號碼尋找服務
           </p>
         </div>
 
