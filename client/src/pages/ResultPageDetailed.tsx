@@ -241,6 +241,11 @@ export default function ResultPageDetailed() {
           {/* 四大維度評分 */}
           <div className="bg-gray-50 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">綜合運勢評分</h3>
+            <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-4">
+              <p className="text-sm text-yellow-800">
+                ⚠️ <strong>重要提示：</strong>您的電話號碼磁場能量未達理想水平，可能影響各方面運勢發展。建議考慮更換更合適的號碼組合。
+              </p>
+            </div>
             <div className="space-y-4">
               {[
                 { key: 'career', label: '事業運', icon: '💼', color: 'bg-blue-500' },
@@ -288,9 +293,14 @@ export default function ResultPageDetailed() {
                 <h3 className={`text-xl font-bold bg-gradient-to-r ${dimension.color} text-transparent bg-clip-text mb-3`}>
                   {dimension.icon} {dimension.label}
                 </h3>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-gray-700 leading-relaxed mb-3">
                   {magnetic.dominantField.detailedAnalysis[dimension.key as keyof typeof magnetic.dominantField.detailedAnalysis]}
                 </p>
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3 mt-3">
+                  <p className="text-sm text-red-700">
+                    ⚠️ <strong>改善建議：</strong>透過更換符合您八字的電話號碼，可有效提升此方面的運勢能量。
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -298,9 +308,12 @@ export default function ResultPageDetailed() {
 
         {/* 改善建議 CTA */}
         <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-lg p-8 text-center text-white mb-6">
-          <h2 className="text-3xl font-bold mb-4">📞 尋找最合適您的電話號碼</h2>
+          <div className="bg-red-500 text-white inline-block px-4 py-2 rounded-full text-sm font-bold mb-4">
+            ⚠️ 緊急提示
+          </div>
+          <h2 className="text-3xl font-bold mb-4">📞 您的電話號碼急需優化！</h2>
           <p className="text-lg mb-6 opacity-90">
-            專業命理師將根據您的八字和磁場，為您尋找最佳的電話號碼組合
+            根據分析結果，您的電話號碼磁場能量不佳，正在阻礙您的運勢發展。專業命理師將根據您的八字，為您尋找最佳的電話號碼組合，全面提升事業、財運、感情和健康運勢！
           </p>
           <div className="bg-white/10 rounded-lg p-6 mb-6 text-left">
             <h3 className="text-xl font-bold mb-4">🎯 服務內容</h3>
@@ -348,12 +361,15 @@ export default function ResultPageDetailed() {
           >
             立即 DM Instagram @destinykey.hk
           </a>
-          <p className="mt-4 text-2xl font-bold">
-            HK$3,888
-          </p>
-          <p className="text-sm opacity-75">
-            專業號碼尋找服務
-          </p>
+          <div className="mt-6 bg-white/20 rounded-lg p-4 inline-block">
+            <p className="text-sm mb-2">原價 <span className="line-through">HK$5,888</span></p>
+            <p className="text-3xl font-bold mb-1">
+              現價 HK$3,888
+            </p>
+            <p className="text-sm opacity-90">
+              改變號碼，改變命運！投資您的未來
+            </p>
+          </div>
         </div>
 
         {/* 返回按鈕 */}
