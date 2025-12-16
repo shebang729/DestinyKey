@@ -34,7 +34,7 @@ export const MAGNETIC_FIELDS_DETAILED: Record<string, MagneticField> = {
     name: '天醫磁場',
     description: '財富、貴人、健康之星',
     characteristics: ['財運亨通', '貴人相助', '身體健康', '事業順利'],
-    scores: { career: 65, wealth: 70, relationship: 60, health: 65 },
+    scores: { career: 80, wealth: 85, relationship: 75, health: 85 },
     luckyLevel: 'excellent',
     detailedAnalysis: {
       overview: '天醫磁場是八大磁場中最吉利的磁場之一，代表著財富、健康和貴人運。擁有此磁場的人通常財運亨通，容易得到貴人相助，身體健康狀況良好。',
@@ -49,7 +49,7 @@ export const MAGNETIC_FIELDS_DETAILED: Record<string, MagneticField> = {
     name: '延年磁場',
     description: '領導、決斷、執行力',
     characteristics: ['領導能力強', '決策果斷', '執行力高', '責任心重'],
-    scores: { career: 70, wealth: 60, relationship: 55, health: 65 },
+    scores: { career: 85, wealth: 75, relationship: 70, health: 80 },
     luckyLevel: 'excellent',
     detailedAnalysis: {
       overview: '延年磁場代表著強大的領導力和執行力，是成功人士的典型磁場。擁有此磁場的人決策果斷，責任心強，善於掌控局面。',
@@ -64,7 +64,7 @@ export const MAGNETIC_FIELDS_DETAILED: Record<string, MagneticField> = {
     name: '生氣磁場',
     description: '人緣、溝通、創意',
     characteristics: ['人緣極佳', '溝通能力強', '創意豐富', '樂觀積極'],
-    scores: { career: 60, wealth: 55, relationship: 70, health: 65 },
+    scores: { career: 75, wealth: 70, relationship: 85, health: 80 },
     luckyLevel: 'excellent',
     detailedAnalysis: {
       overview: '生氣磁場代表著旺盛的生命力和創造力，是人緣最好的磁場。擁有此磁場的人性格開朗，善於溝通，創意無限。',
@@ -79,7 +79,7 @@ export const MAGNETIC_FIELDS_DETAILED: Record<string, MagneticField> = {
     name: '伏位磁場',
     description: '穩定、等待、積累',
     characteristics: ['性格穩定', '善於等待', '積累能量', '持之以恆'],
-    scores: { career: 50, wealth: 50, relationship: 50, health: 55 },
+    scores: { career: 65, wealth: 65, relationship: 65, health: 70 },
     luckyLevel: 'neutral',
     detailedAnalysis: {
       overview: '伏位磁場代表著穩定和積累，是一個中性偏吉的磁場。擁有此磁場的人性格穩重，善於等待時機，持之以恆。',
@@ -94,7 +94,7 @@ export const MAGNETIC_FIELDS_DETAILED: Record<string, MagneticField> = {
     name: '絕命磁場',
     description: '極端、突破、危機',
     characteristics: ['個性極端', '突破能力', '危機意識', '壓力較大'],
-    scores: { career: 40, wealth: 45, relationship: 35, health: 30 },
+    scores: { career: 55, wealth: 60, relationship: 50, health: 45 },
     luckyLevel: 'challenging',
     detailedAnalysis: {
       overview: '絕命磁場是最具挑戰性的磁場之一，代表著極端和突破。擁有此磁場的人個性鮮明，要麼大成功要麼大失敗，人生起伏較大。',
@@ -109,7 +109,7 @@ export const MAGNETIC_FIELDS_DETAILED: Record<string, MagneticField> = {
     name: '五鬼磁場',
     description: '智慧、變化、不穩',
     characteristics: ['智慧過人', '變化多端', '情緒不穩', '思慮過多'],
-    scores: { career: 50, wealth: 45, relationship: 40, health: 45 },
+    scores: { career: 70, wealth: 65, relationship: 55, health: 60 },
     luckyLevel: 'neutral',
     detailedAnalysis: {
       overview: '五鬼磁場代表著智慧和變化，是一個充滿矛盾的磁場。擁有此磁場的人聰明過人，但情緒容易波動，思慮過多。',
@@ -124,7 +124,7 @@ export const MAGNETIC_FIELDS_DETAILED: Record<string, MagneticField> = {
     name: '六煞磁場',
     description: '桃花、人緣、消耗',
     characteristics: ['桃花運強', '人緣好', '消耗較大', '感情複雜'],
-    scores: { career: 45, wealth: 40, relationship: 60, health: 50 },
+    scores: { career: 60, wealth: 55, relationship: 75, health: 65 },
     luckyLevel: 'neutral',
     detailedAnalysis: {
       overview: '六煞磁場代表著桃花和人緣，但也伴隨著消耗。擁有此磁場的人魅力十足，異性緣好，但感情容易複雜。',
@@ -139,7 +139,7 @@ export const MAGNETIC_FIELDS_DETAILED: Record<string, MagneticField> = {
     name: '禍害磁場',
     description: '口才、是非、波折',
     characteristics: ['口才極佳', '容易是非', '波折較多', '需謹言慎行'],
-    scores: { career: 45, wealth: 40, relationship: 40, health: 35 },
+    scores: { career: 65, wealth: 60, relationship: 60, health: 55 },
     luckyLevel: 'challenging',
     detailedAnalysis: {
       overview: '禍害磁場代表著口才和是非，是一個需要特別注意的磁場。擁有此磁場的人口才極佳，但容易招惹是非，人生波折較多。',
@@ -303,10 +303,10 @@ export function analyzePhoneNumber(phoneNumber: string): {
       overallScores.health += combo.field.scores.health;
     });
     
-    overallScores.career = Math.max(20, Math.round(overallScores.career / combinations.length) - 12);
-    overallScores.wealth = Math.max(20, Math.round(overallScores.wealth / combinations.length) - 15);
-    overallScores.relationship = Math.max(20, Math.round(overallScores.relationship / combinations.length) - 10);
-    overallScores.health = Math.max(20, Math.round(overallScores.health / combinations.length) - 13);
+    overallScores.career = Math.max(30, Math.round(overallScores.career / combinations.length) - 7);
+    overallScores.wealth = Math.max(30, Math.round(overallScores.wealth / combinations.length) - 8);
+    overallScores.relationship = Math.max(30, Math.round(overallScores.relationship / combinations.length) - 5);
+    overallScores.health = Math.max(30, Math.round(overallScores.health / combinations.length) - 6);
   }
   
   return {
