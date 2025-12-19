@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { trpc } from '../utils/trpc';
+// import { trpc } from '../utils/trpc'; // 改用直接 API 調用
 import { useState } from 'react';
 
 interface BaziInfo {
@@ -64,7 +64,7 @@ export default function ResultPageDetailed() {
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
 
-  const createCheckoutSession = trpc.payment.createCheckoutSession.useMutation();
+  // const createCheckoutSession = trpc.payment.createCheckoutSession.useMutation();
 
   if (!result) {
     navigate('/');
@@ -79,16 +79,27 @@ export default function ResultPageDetailed() {
     setPaymentError(null);
 
     try {
-      const response = await createCheckoutSession.mutateAsync({
-        name: result.name,
-        phoneNumber: result.phoneNumber,
+      const response = await fetch('https://destinykey-production.up.railway.app/trpc/payment.createCheckoutSession', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: result.name,
+          phoneNumber: result.phoneNumber,
+        }),
       });
 
-      // 跳轉到 Stripe Checkout 頁面
-      if (response.url) {
-        window.location.href = response.url;
+      const data = await response.json();
+
+      if (data.result?.data?.url) {
+        // 跳轉到 Stripe Checkout 頁面
+        window.location.href = data.result.data.url;
+      } else {
+        throw new Error('無法獲取付款連結');
       }
     } catch (error: any) {
+      console.error('Payment error:', error);
       setPaymentError('付款處理失敗，請稍後再試');
       setIsProcessingPayment(false);
     }
