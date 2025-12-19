@@ -13,8 +13,9 @@ export default function HomePage() {
   const detailedAnalysisMutation = trpc.analysis.detailedAnalysis.useMutation();
 
   const handleAnalyze = async () => {
-    if (!fullName || !birthDate || !birthTime || !phoneNumber) {
-      alert("請填寫所有必填欄位");
+    // 只檢查電話號碼是否填寫
+    if (!phoneNumber) {
+      alert("請輸入電話號碼");
       return;
     }
     
@@ -25,11 +26,11 @@ export default function HomePage() {
 
     setIsAnalyzing(true);
     try {
-      // 組合出生日期和時間
-      const birthDateTime = `${birthDate}T${birthTime}:00`;
+      // 組合出生日期和時間（如果有填寫）
+      const birthDateTime = (birthDate && birthTime) ? `${birthDate}T${birthTime}:00` : undefined;
       
       const result = await detailedAnalysisMutation.mutateAsync({
-        name: fullName,
+        name: fullName || '用戶',
         birthDate: birthDateTime,
         phoneNumber
       });
