@@ -1,0 +1,25 @@
+# robots.txt for https://destiny-key.vercel.app
+
+User-agent: *
+Allow: /
+Allow: /result
+Allow: /payment-success
+Disallow: /payment-cancelled
+
+# Sitemap
+Sitemap: https://destiny-key.vercel.app/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Baidu (for potential mainland China users)
+User-agent: Baiduspider
+Allow: /
