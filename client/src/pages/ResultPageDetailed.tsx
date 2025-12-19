@@ -475,7 +475,14 @@ export default function ResultPageDetailed() {
                 </div>
               </li>
               <li className="flex items-start">
-                <span className="mr-3 text-2xl">🔢</span>
+                <span className="mr-3 text-2xl">👨‍🏫</span>
+                <div>
+                  <h4 className="font-semibold mb-1">真人命理師傅服務</h4>
+                  <p className="text-sm opacity-90">付款後 24 小時內，專業師傅會透過 WhatsApp 聯繫您</p>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-3 text-2xl">📱</span>
                 <div>
                   <h4 className="font-semibold mb-1">專屬號碼推薦</h4>
                   <p className="text-sm opacity-90">提供 3-5 組最符合您命理的電話號碼選擇</p>
@@ -527,7 +534,17 @@ export default function ResultPageDetailed() {
                   <p>• <strong>100%</strong> 的客戶都說：「早知道就早點換！」</p>
                 </div>
               </div>
-              <p className="text-sm opacity-75">
+              <div className="bg-green-500/20 rounded-lg p-4 border border-green-300">
+                <p className="font-bold text-green-100 mb-2">💬 服務流程：</p>
+                <ol className="text-xs space-y-2 text-left">
+                  <li><strong>1.</strong> 完成付款後，系統自動記錄您的資料</li>
+                  <li><strong>2.</strong> 24 小時內，真人命理師傅會透過 <strong>WhatsApp</strong> 聯繫您</li>
+                  <li><strong>3.</strong> 師傅會根據您的八字和磁場分析，推薦 3-5 組吉祥號碼</li>
+                  <li><strong>4.</strong> 如有額外問題，可留訊息，師傅會一次過回覆</li>
+                  <li><strong>5.</strong> 您可自行前往電訊商申請推薦的號碼</li>
+                </ol>
+              </div>
+              <p className="text-sm opacity-75 mt-4">
                 ⚠️ 注意：我們會為您尋找並推薦最合適的號碼，但需要您自行前往電訊商申請
               </p>
             </div>
@@ -544,8 +561,11 @@ export default function ResultPageDetailed() {
               {paymentError}
             </p>
           )}
-          <p className="mt-4 text-sm opacity-80">
-            或聯繫 Instagram @destinykey.hk 查詢
+          <p className="mt-4 text-sm opacity-90">
+            📞 <strong>付款後 24 小時內，真人師傅會透過 WhatsApp 聯繫您</strong>
+          </p>
+          <p className="mt-2 text-xs opacity-75">
+            有任何問題可聯繫 Instagram @destinykey.hk 查詢
           </p>
           <div className="mt-6 bg-white/20 rounded-lg p-4 inline-block">
             <p className="text-sm mb-2">原價 <span className="line-through">HK$5,888</span></p>
