@@ -1,28 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { trpc } from '../utils/trpc';
 
 export default function PaymentSuccess() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get('session_id');
-  const [paymentInfo, setPaymentInfo] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const verifyPayment = trpc.payment.verifyPayment.useQuery(
-    { sessionId: sessionId || '' },
-    { enabled: !!sessionId }
-  );
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (verifyPayment.data) {
-      setPaymentInfo(verifyPayment.data);
-      setIsLoading(false);
+    if (!sessionId) {
+      navigate('/');
     }
-  }, [verifyPayment.data]);
+  }, [sessionId, navigate]);
 
   if (!sessionId) {
-    navigate('/');
     return null;
   }
 
@@ -56,22 +47,18 @@ export default function PaymentSuccess() {
               <h2 className="text-xl font-bold text-gray-800 mb-4">訂單詳情</h2>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">客戶姓名：</span>
-                  <span className="font-semibold">{paymentInfo?.customerName}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">當前號碼：</span>
-                  <span className="font-semibold">{paymentInfo?.phoneNumber}</span>
-                </div>
-                <div className="flex justify-between">
                   <span className="text-gray-600">服務項目：</span>
                   <span className="font-semibold">尋找最合適電話號碼</span>
                 </div>
                 <div className="flex justify-between border-t pt-3">
                   <span className="text-gray-600">付款金額：</span>
                   <span className="text-2xl font-bold text-purple-600">
-                    HK${paymentInfo?.amountTotal ? (paymentInfo.amountTotal / 100).toFixed(2) : '3,888.00'}
+                    HK$3,888.00
                   </span>
+                </div>
+                <div className="flex justify-between text-sm text-gray-500">
+                  <span>訂單編號：</span>
+                  <span className="font-mono">{sessionId.substring(0, 20)}...</span>
                 </div>
               </div>
             </div>
