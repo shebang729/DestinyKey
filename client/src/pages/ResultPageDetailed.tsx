@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { trpc } from '../utils/trpc';
+import { useState } from 'react';
 
 interface BaziInfo {
   year: { stem: string; branch: string; element: string };
@@ -59,6 +61,10 @@ export default function ResultPageDetailed() {
   const location = useLocation();
   const navigate = useNavigate();
   const result = location.state?.result as AnalysisResult;
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+
+  const createCheckoutSession = trpc.payment.createCheckoutSession.useMutation();
 
   if (!result) {
     navigate('/');
@@ -66,6 +72,27 @@ export default function ResultPageDetailed() {
   }
 
   const { bazi, magnetic } = result;
+
+  // 處理付款
+  const handlePayment = async () => {
+    setIsProcessingPayment(true);
+    setPaymentError(null);
+
+    try {
+      const response = await createCheckoutSession.mutateAsync({
+        name: result.name,
+        phoneNumber: result.phoneNumber,
+      });
+
+      // 跳轉到 Stripe Checkout 頁面
+      if (response.url) {
+        window.location.href = response.url;
+      }
+    } catch (error: any) {
+      setPaymentError('付款處理失敗，請稍後再試');
+      setIsProcessingPayment(false);
+    }
+  };
 
   // 五行顏色映射
   const elementColors: Record<string, string> = {
@@ -353,14 +380,21 @@ export default function ResultPageDetailed() {
               </p>
             </div>
           </div>
-          <a
-            href="https://www.instagram.com/destinykey.hk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-100 transition-colors shadow-lg"
+          <button
+            onClick={handlePayment}
+            disabled={isProcessingPayment}
+            className="inline-block bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-100 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            立即 DM Instagram @destinykey.hk
-          </a>
+            {isProcessingPayment ? '處理中...' : '立即購買 - 安全付款'}
+          </button>
+          {paymentError && (
+            <p className="mt-4 text-red-200 bg-red-900/30 px-4 py-2 rounded-lg">
+              {paymentError}
+            </p>
+          )}
+          <p className="mt-4 text-sm opacity-80">
+            或聯繫 Instagram @destinykey.hk 查詢
+          </p>
           <div className="mt-6 bg-white/20 rounded-lg p-4 inline-block">
             <p className="text-sm mb-2">原價 <span className="line-through">HK$5,888</span></p>
             <p className="text-3xl font-bold mb-1">

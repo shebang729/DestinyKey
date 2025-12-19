@@ -4,6 +4,8 @@ import { httpBatchLink } from "@trpc/client";
 import { trpc } from "./lib/trpc";
 import HomePage from "./pages/HomePage";
 import ResultPageDetailed from "./pages/ResultPageDetailed";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancelled from "./pages/PaymentCancelled";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/result" element={<ResultPageDetailed />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-cancelled" element={<PaymentCancelled />} />
             <Route path="*" element={
               <div className="min-h-screen flex items-center justify-center">
                 <div className="text-center">
