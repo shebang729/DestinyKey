@@ -2,24 +2,26 @@ import { z } from 'zod';
 import { publicProcedure, router } from '../_core/trpc';
 import { analyzePhoneNumber } from '../algorithms/magneticFieldsDetailed';
 import { calculateBazi, getFiveElementsRelations } from '../algorithms/bazi';
+import { calculateEnhancedBazi } from '../algorithms/baziEnhanced';
+import { generateRecommendedNumbers, analyzeExistingNumber } from '../algorithms/numberRecommendation';
 
 export const analysisRouter = router({
+  // 原有的詳細分析（保留向後兼容）
   detailedAnalysis: publicProcedure
     .input(z.object({
       name: z.string().min(1),
-      birthDate: z.string().optional(), // ISO 8601 format, 選填
+      birthDate: z.string().optional(),
       phoneNumber: z.string().min(8).max(20)
     }))
     .mutation(async ({ input }) => {
       const { name, birthDate, phoneNumber } = input;
       
-      // 計算八字（如果有提供出生日期）
+      // 計算八字
       let baziResult;
       if (birthDate) {
         const birth = new Date(birthDate);
         baziResult = calculateBazi(birth);
       } else {
-        // 使用預設八字（當沒有提供出生日期時）
         baziResult = {
           year: { stem: '甲', branch: '子', element: '木' },
           month: { stem: '丙', branch: '寅', element: '火' },
@@ -59,6 +61,134 @@ export const analysisRouter = router({
           combinations: magneticAnalysis.combinations,
           dominantField: magneticAnalysis.dominantField,
           scores: magneticAnalysis.overallScores
+        },
+        timestamp: new Date().toISOString()
+      };
+    }),
+
+  // 新增：增強版詳細分析
+  enhancedAnalysis: publicProcedure
+    .input(z.object({
+      name: z.string().min(1),
+      birthDate: z.string(), // 必填
+      phoneNumber: z.string().min(8).max(20)
+    }))
+    .mutation(async ({ input }) => {
+      const { name, birthDate, phoneNumber } = input;
+      
+      // 計算增強版八字
+      const birth = new Date(birthDate);
+      const baziResult = calculateEnhancedBazi(birth);
+      
+      // 分析電話號碼磁場
+      const magneticAnalysis = analyzePhoneNumber(phoneNumber);
+      
+      // 分析現有號碼與八字的配合
+      const numberAnalysis = analyzeExistingNumber(phoneNumber, baziResult);
+      
+      // 生成推薦號碼
+      const recommendations = generateRecommendedNumbers(baziResult, 5);
+      
+      // 獲取五行關係
+      const fiveElementsRelations = getFiveElementsRelations();
+      
+      return {
+        name,
+        birthDate,
+        phoneNumber,
+        
+        // 增強版八字分析
+        bazi: {
+          fourPillars: baziResult.fourPillars,
+          zodiac: baziResult.zodiac,
+          fiveElements: baziResult.fiveElements,
+          dayMasterStrength: baziResult.dayMasterStrength,
+          usefulGod: baziResult.usefulGod,
+          joyfulGod: baziResult.joyfulGod,
+          tabooGod: baziResult.tabooGod,
+          tenGodsAnalysis: baziResult.tenGodsAnalysis,
+          spiritsAnalysis: baziResult.spiritsAnalysis,
+          detailedAnalysis: baziResult.detailedAnalysis,
+          strengths: baziResult.strengths,
+          weaknesses: baziResult.weaknesses,
+          recommendations: baziResult.recommendations,
+          relations: fiveElementsRelations
+        },
+        
+        // 磁場分析
+        magnetic: {
+          combinations: magneticAnalysis.combinations,
+          dominantField: magneticAnalysis.dominantField,
+          scores: magneticAnalysis.overallScores
+        },
+        
+        // 現有號碼分析
+        currentNumberAnalysis: {
+          score: numberAnalysis.score,
+          magneticAnalysis: numberAnalysis.magneticAnalysis,
+          fiveElementsAnalysis: numberAnalysis.fiveElementsAnalysis,
+          recommendations: numberAnalysis.recommendations
+        },
+        
+        // 推薦號碼
+        recommendedNumbers: recommendations,
+        
+        timestamp: new Date().toISOString()
+      };
+    }),
+
+  // 新增：僅生成推薦號碼
+  recommendNumbers: publicProcedure
+    .input(z.object({
+      birthDate: z.string(),
+      count: z.number().min(1).max(10).optional()
+    }))
+    .mutation(async ({ input }) => {
+      const { birthDate, count = 5 } = input;
+      
+      // 計算八字
+      const birth = new Date(birthDate);
+      const baziResult = calculateEnhancedBazi(birth);
+      
+      // 生成推薦號碼
+      const recommendations = generateRecommendedNumbers(baziResult, count);
+      
+      return {
+        recommendations,
+        baziSummary: {
+          dayMasterElement: baziResult.fourPillars.day.element,
+          dayMasterStrength: baziResult.dayMasterStrength,
+          usefulGod: baziResult.usefulGod,
+          tabooGod: baziResult.tabooGod
+        },
+        timestamp: new Date().toISOString()
+      };
+    }),
+
+  // 新增：分析號碼與八字配合度
+  analyzeNumberMatch: publicProcedure
+    .input(z.object({
+      phoneNumber: z.string().min(8).max(20),
+      birthDate: z.string()
+    }))
+    .mutation(async ({ input }) => {
+      const { phoneNumber, birthDate } = input;
+      
+      // 計算八字
+      const birth = new Date(birthDate);
+      const baziResult = calculateEnhancedBazi(birth);
+      
+      // 分析號碼
+      const analysis = analyzeExistingNumber(phoneNumber, baziResult);
+      
+      return {
+        phoneNumber,
+        analysis,
+        baziSummary: {
+          dayMasterElement: baziResult.fourPillars.day.element,
+          dayMasterStrength: baziResult.dayMasterStrength,
+          usefulGod: baziResult.usefulGod,
+          tabooGod: baziResult.tabooGod
         },
         timestamp: new Date().toISOString()
       };
