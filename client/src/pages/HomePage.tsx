@@ -199,8 +199,9 @@ export default function HomePage() {
                   <div className="bg-white rounded-lg p-4 border-2 border-pink-300 shadow-md relative">
                     <div className="absolute -top-3 right-4 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-bold">超值優惠</div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-pink-600 mb-2">HK$8,888</div>
-                      <div className="text-lg font-semibold text-gray-800 mb-2">伴侶/夫妻雙人方案</div>
+                      <div className="text-3xl font-bold text-pink-600 mb-2">HK$6,888</div>
+                      <div className="text-lg font-semibold text-gray-800 mb-2">雙人方案</div>
+                      <div className="text-xs text-gray-500 mb-2">（情侶、朋友、家人）</div>
                       <div className="text-sm text-gray-600">
                         結合兩人八字時辰<br/>
                         打造最佳能量組合
