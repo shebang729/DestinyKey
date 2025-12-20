@@ -567,14 +567,44 @@ export default function ResultPageDetailed() {
           <p className="mt-2 text-xs opacity-75">
             有任何問題可聯繫 Instagram @destinykey.hk 查詢
           </p>
-          <div className="mt-6 bg-white/20 rounded-lg p-4 inline-block">
-            <p className="text-sm mb-2">原價 <span className="line-through">HK$5,888</span></p>
-            <p className="text-3xl font-bold mb-1">
-              現價 HK$3,888
-            </p>
-            <p className="text-sm opacity-90">
-              改變號碼，改變命運！投資您的未來
-            </p>
+          <div className="mt-6 bg-white/20 rounded-lg p-6 inline-block max-w-2xl">
+            <h3 className="text-2xl font-bold mb-4 text-yellow-300">💰 收費方案</h3>
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="bg-white/10 rounded-lg p-4 border-2 border-white/30">
+                <div className="text-center">
+                  <div className="text-3xl font-bold mb-2">HK$3,888</div>
+                  <div className="text-lg font-semibold mb-2">單人改號方案</div>
+                  <div className="text-sm opacity-90">
+                    專業命理師為您量身挑選<br/>
+                    最適合的電話號碼
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-yellow-400/20 to-pink-400/20 rounded-lg p-4 border-2 border-yellow-300 relative">
+                <div className="absolute -top-3 right-4 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-bold">超值優惠</div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold mb-2 text-yellow-300">HK$8,888</div>
+                  <div className="text-lg font-semibold mb-2">伴侶/夫妻雙人方案</div>
+                  <div className="text-sm opacity-90">
+                    結合兩人八字時辰<br/>
+                    打造最佳能量組合
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-green-500/20 rounded-lg p-4 border border-green-300 mb-4">
+              <p className="font-bold text-green-100 mb-2">✅ 服務承諾：</p>
+              <ul className="text-sm space-y-1">
+                <li>• <strong>24小時內</strong> WhatsApp 聯絡您</li>
+                <li>• <strong>一個星期內</strong>提供專業分析結果</li>
+                <li>• 推薦 3-5 組最符合您命理的號碼</li>
+              </ul>
+            </div>
+            <div className="bg-yellow-500/20 rounded-lg p-4 border border-yellow-300">
+              <p className="text-sm">
+                💡 <strong>温馨提示：</strong>可先付款單人方案 HK$3,888，如需雙人服務，師傅會在 WhatsApp 聯絡時與您討論。
+              </p>
+            </div>
           </div>
         </div>
 

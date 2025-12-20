@@ -182,15 +182,55 @@ export default function HomePage() {
                 )}
               </button>
 
-              <p className="text-sm text-gray-500 text-center">
-                免費版提供基礎評分，想了解更多？
-                <button 
-                  onClick={handleInstagramClick}
-                  className="text-purple-600 hover:underline ml-1"
-                >
-                  DM 我們的 Instagram
-                </button>
-              </p>
+              {/* 收費方案說明 */}
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-lg p-6 mt-6">
+                <h3 className="text-xl font-bold text-center mb-4 text-purple-800">💎 專業改號服務收費</h3>
+                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                  <div className="bg-white rounded-lg p-4 border-2 border-purple-300 shadow-md">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-purple-600 mb-2">HK$3,888</div>
+                      <div className="text-lg font-semibold text-gray-800 mb-2">單人改號方案</div>
+                      <div className="text-sm text-gray-600">
+                        專業命理師為您量身挑選<br/>
+                        最適合的電話號碼
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg p-4 border-2 border-pink-300 shadow-md relative">
+                    <div className="absolute -top-3 right-4 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-bold">超值優惠</div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-pink-600 mb-2">HK$8,888</div>
+                      <div className="text-lg font-semibold text-gray-800 mb-2">伴侶/夫妻雙人方案</div>
+                      <div className="text-sm text-gray-600">
+                        結合兩人八字時辰<br/>
+                        打造最佳能量組合
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-4 mb-3">
+                  <div className="flex items-start gap-2">
+                    <svg className="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"/>
+                    </svg>
+                    <div className="text-sm text-yellow-800">
+                      <p className="font-semibold mb-1">服務流程：</p>
+                      <p>1. 可先付款單人方案 HK$3,888</p>
+                      <p>2. 24小時內 WhatsApp 聯絡您</p>
+                      <p>3. 一個星期內提供專業分析結果</p>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 text-center">
+                  免費版提供基礎評分，想了解更多？
+                  <button 
+                    onClick={handleInstagramClick}
+                    className="text-purple-600 hover:underline ml-1 font-semibold"
+                  >
+                    DM 我們的 Instagram
+                  </button>
+                </p>
+              </div>
             </div>
           </div>
         </div>
