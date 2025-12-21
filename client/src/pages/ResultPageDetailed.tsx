@@ -19,6 +19,14 @@ interface BaziInfo {
   analysis: string;
   strengths: string[];
   weaknesses: string[];
+  dayMasterAnalysis?: string;
+  zodiacFortune?: string;
+  fiveElementsDetailed?: string;
+  careerFortune?: string;
+  wealthFortune?: string;
+  relationshipFortune?: string;
+  healthFortune?: string;
+  recommendations?: string[];
 }
 
 interface MagneticField {
@@ -54,6 +62,20 @@ interface AnalysisResult {
       relationship: number;
       health: number;
     };
+  };
+  numberScore?: {
+    overall: number;
+    magneticScore: number;
+    luckyPercentage: number;
+    neutralPercentage: number;
+    unluckyPercentage: number;
+    urgency: string;
+    urgencyDescription: string;
+    urgencyDetailedDescription: string;
+    problems: string[];
+    suggestions: string[];
+    detailedAnalysis: string;
+    potentialImpacts: string[];
   };
 }
 
@@ -232,7 +254,122 @@ export default function ResultPageDetailed() {
               )}
             </div>
           )}
+
+          {/* 新增：日主特質分析 */}
+          {bazi.dayMasterAnalysis && (
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 mt-6">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                <span className="mr-2">🌟</span>
+                您的日主特質詳解
+              </h3>
+              <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                {bazi.dayMasterAnalysis}
+              </div>
+            </div>
+          )}
+
+          {/* 新增：生肖運勢 */}
+          {bazi.zodiacFortune && (
+            <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-6 mt-6">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                <span className="mr-2">🐉</span>
+                {bazi.zodiac}年生肖運勢
+              </h3>
+              <div className="text-gray-700 leading-relaxed">
+                {bazi.zodiacFortune}
+              </div>
+            </div>
+          )}
+
+          {/* 新增：五行詳細分析 */}
+          {bazi.fiveElementsDetailed && (
+            <div className="bg-white border-2 border-purple-200 rounded-lg p-6 mt-6">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
+                <span className="mr-2">☘️</span>
+                五行詳細分析
+              </h3>
+              <div className="text-gray-700 leading-relaxed whitespace-pre-line text-sm">
+                {bazi.fiveElementsDetailed}
+              </div>
+            </div>
+          )}
         </div>
+
+        {/* 新增：綜合運勢分析 */}
+        {(bazi.careerFortune || bazi.wealthFortune || bazi.relationshipFortune || bazi.healthFortune) && (
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+              <span className="mr-2">📊</span>
+              綜合運勢詳解
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {bazi.careerFortune && (
+                <div className="bg-blue-50 rounded-lg p-5">
+                  <h3 className="text-lg font-semibold text-blue-800 mb-3 flex items-center">
+                    <span className="mr-2">💼</span>
+                    事業運
+                  </h3>
+                  <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                    {bazi.careerFortune}
+                  </div>
+                </div>
+              )}
+              {bazi.wealthFortune && (
+                <div className="bg-yellow-50 rounded-lg p-5">
+                  <h3 className="text-lg font-semibold text-yellow-800 mb-3 flex items-center">
+                    <span className="mr-2">💰</span>
+                    財運
+                  </h3>
+                  <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                    {bazi.wealthFortune}
+                  </div>
+                </div>
+              )}
+              {bazi.relationshipFortune && (
+                <div className="bg-pink-50 rounded-lg p-5">
+                  <h3 className="text-lg font-semibold text-pink-800 mb-3 flex items-center">
+                    <span className="mr-2">💕</span>
+                    感情運
+                  </h3>
+                  <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                    {bazi.relationshipFortune}
+                  </div>
+                </div>
+              )}
+              {bazi.healthFortune && (
+                <div className="bg-green-50 rounded-lg p-5">
+                  <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
+                    <span className="mr-2">🌿</span>
+                    健康運
+                  </h3>
+                  <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                    {bazi.healthFortune}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* 新增：改運建議 */}
+        {bazi.recommendations && bazi.recommendations.length > 0 && (
+          <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl shadow-lg p-6 mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+              <span className="mr-2">💡</span>
+              專業改運建議
+            </h2>
+            <div className="grid md:grid-cols-2 gap-3">
+              {bazi.recommendations.map((rec, index) => (
+                <div key={index} className="bg-white rounded-lg p-4 shadow-sm">
+                  <p className="text-sm text-gray-700 flex items-start">
+                    <span className="text-purple-600 mr-2 flex-shrink-0">✓</span>
+                    <span>{rec}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* 磁場分析 */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
@@ -275,6 +412,106 @@ export default function ResultPageDetailed() {
               ))}
             </div>
           </div>
+
+          {/* 新增：號碼評分分析 */}
+          {result.numberScore && (
+            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 mb-6">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <span className="mr-2">🎯</span>
+                您的號碼綜合評分
+              </h3>
+              
+              {/* 綜合評分 */}
+              <div className="bg-white rounded-lg p-6 mb-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <div className="text-4xl font-bold text-purple-600">{result.numberScore.overall} 分</div>
+                    <div className="text-sm text-gray-600 mt-1">{result.numberScore.urgencyDescription}</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm text-gray-600">磁場評分</div>
+                    <div className="text-2xl font-bold text-gray-800">{result.numberScore.magneticScore}</div>
+                  </div>
+                </div>
+                
+                {/* 磁場分佈 */}
+                <div className="grid grid-cols-3 gap-3 mb-4">
+                  <div className="bg-green-50 rounded-lg p-3 text-center">
+                    <div className="text-xs text-green-700 mb-1">吉星磁場</div>
+                    <div className="text-2xl font-bold text-green-600">{result.numberScore.luckyPercentage}%</div>
+                  </div>
+                  <div className="bg-yellow-50 rounded-lg p-3 text-center">
+                    <div className="text-xs text-yellow-700 mb-1">中性磁場</div>
+                    <div className="text-2xl font-bold text-yellow-600">{result.numberScore.neutralPercentage}%</div>
+                  </div>
+                  <div className="bg-red-50 rounded-lg p-3 text-center">
+                    <div className="text-xs text-red-700 mb-1">凶星磁場</div>
+                    <div className="text-2xl font-bold text-red-600">{result.numberScore.unluckyPercentage}%</div>
+                  </div>
+                </div>
+                
+                {/* 緊急程度說明 */}
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    {result.numberScore.urgencyDetailedDescription}
+                  </p>
+                </div>
+              </div>
+              
+              {/* 詳細分析 */}
+              <div className="bg-white rounded-lg p-6 mb-4">
+                <h4 className="font-semibold text-gray-800 mb-3">📊 詳細分析</h4>
+                <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+                  {result.numberScore.detailedAnalysis}
+                </div>
+              </div>
+              
+              {/* 存在的問題 */}
+              {result.numberScore.problems.length > 0 && (
+                <div className="bg-red-50 rounded-lg p-6 mb-4">
+                  <h4 className="font-semibold text-red-800 mb-3">⚠️ 發現的問題</h4>
+                  <ul className="space-y-2">
+                    {result.numberScore.problems.map((problem, index) => (
+                      <li key={index} className="text-sm text-red-700 flex items-start">
+                        <span className="mr-2 flex-shrink-0">•</span>
+                        <span>{problem}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {/* 潛在影響 */}
+              {result.numberScore.potentialImpacts.length > 0 && (
+                <div className="bg-orange-50 rounded-lg p-6 mb-4">
+                  <h4 className="font-semibold text-orange-800 mb-3">💥 不改號的潛在影響</h4>
+                  <ul className="space-y-2">
+                    {result.numberScore.potentialImpacts.map((impact, index) => (
+                      <li key={index} className="text-sm text-orange-700 flex items-start">
+                        <span className="mr-2 flex-shrink-0">•</span>
+                        <span>{impact}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {/* 改善建議 */}
+              {result.numberScore.suggestions.length > 0 && (
+                <div className="bg-blue-50 rounded-lg p-6">
+                  <h4 className="font-semibold text-blue-800 mb-3">💡 專業建議</h4>
+                  <ul className="space-y-2">
+                    {result.numberScore.suggestions.map((suggestion, index) => (
+                      <li key={index} className="text-sm text-blue-700 flex items-start">
+                        <span className="mr-2 flex-shrink-0">✓</span>
+                        <span>{suggestion}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* 負面磁場警示 */}
           <div className="bg-red-50 border-2 border-red-300 rounded-lg p-6 mb-6">

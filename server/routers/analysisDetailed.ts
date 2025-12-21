@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { publicProcedure, router } from '../_core/trpc';
 import { analyzePhoneNumber } from '../algorithms/magneticFieldsDetailed';
 import { calculateBazi, getFiveElementsRelations } from '../algorithms/bazi';
+import { scorePhoneNumber, getUrgencyDescription, getUrgencyDetailedDescription } from '../algorithms/numberScoring';
 import { calculateEnhancedBazi } from '../algorithms/baziEnhanced';
 import { generateRecommendedNumbers, analyzeExistingNumber } from '../algorithms/numberRecommendation';
 
@@ -41,6 +42,9 @@ export const analysisRouter = router({
       // 獲取五行關係
       const fiveElementsRelations = getFiveElementsRelations();
       
+      // 評分號碼
+      const numberScore = scorePhoneNumber(phoneNumber);
+      
       return {
         name,
         birthDate,
@@ -55,12 +59,34 @@ export const analysisRouter = router({
           analysis: baziResult.analysis,
           strengths: baziResult.strengths,
           weaknesses: baziResult.weaknesses,
+          dayMasterAnalysis: baziResult.dayMasterAnalysis,
+          zodiacFortune: baziResult.zodiacFortune,
+          fiveElementsDetailed: baziResult.fiveElementsDetailed,
+          careerFortune: baziResult.careerFortune,
+          wealthFortune: baziResult.wealthFortune,
+          relationshipFortune: baziResult.relationshipFortune,
+          healthFortune: baziResult.healthFortune,
+          recommendations: baziResult.recommendations,
           relations: fiveElementsRelations
         },
         magnetic: {
           combinations: magneticAnalysis.combinations,
           dominantField: magneticAnalysis.dominantField,
           scores: magneticAnalysis.overallScores
+        },
+        numberScore: {
+          overall: numberScore.overall,
+          magneticScore: numberScore.magneticScore,
+          luckyPercentage: numberScore.luckyPercentage,
+          neutralPercentage: numberScore.neutralPercentage,
+          unluckyPercentage: numberScore.unluckyPercentage,
+          urgency: numberScore.urgency,
+          urgencyDescription: getUrgencyDescription(numberScore.urgency),
+          urgencyDetailedDescription: getUrgencyDetailedDescription(numberScore.urgency),
+          problems: numberScore.problems,
+          suggestions: numberScore.suggestions,
+          detailedAnalysis: numberScore.detailedAnalysis,
+          potentialImpacts: numberScore.potentialImpacts
         },
         timestamp: new Date().toISOString()
       };
