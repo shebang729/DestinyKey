@@ -2,7 +2,7 @@
  * 號碼評分和詳細分析系統
  */
 
-import { analyzeMagneticFieldsDetailed } from './magneticFieldsDetailed';
+import { analyzePhoneNumber } from './magneticFieldsDetailed';
 
 export interface NumberScore {
   overall: number;  // 綜合評分 0-100
@@ -22,7 +22,7 @@ export interface NumberScore {
  */
 export function scorePhoneNumber(phoneNumber: string): NumberScore {
   // 分析磁場
-  const magneticAnalysis = analyzeMagneticFieldsDetailed(phoneNumber);
+  const magneticAnalysis = analyzePhoneNumber(phoneNumber);
   
   // 統計磁場分佈
   let luckyCount = 0;
